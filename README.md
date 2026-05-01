@@ -1,8 +1,8 @@
-# 计算机专业课资源
+﻿# 计算机专业课资源
 
-> 🏠 主仓库：[nudt_learning_resources](https://gitee.com/geekChen01/nudt_learning_resources)
+> 🏠 主仓库：[学习资源主仓库](https://gitee.com/geekChen01/nudt_learning_resources)
 >
-> 本仓库是 [nudt资源森林](https://gitee.com/geekChen01/nudt_learning_resources) 的子项目，专注计算机专业课程学习资料分享。每门课均有独立的 README 说明。
+> 本仓库是 [学习资源总库](https://gitee.com/geekChen01/nudt_learning_resources) 的子项目，专注计算机专业课程学习资料分享。每门课均有独立的 README 说明。
 
 ---
 
