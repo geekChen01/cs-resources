@@ -1,671 +1,1021 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUDT 资源森林 — 共享学习，自由成长</title>
+    <title>CS Resources — NUDT 计算机专业课</title>
+    <meta name="description" content="NUDT 计算机专业课资源。AI、OS、编译原理、计算机网络、离散数学、数据库、软件工程——减少考试消耗，把时间还给自己。">
+    <meta property="og:title" content="CS Resources — NUDT">
+    <meta property="og:description" content="NUDT 计算机专业课资源——减少考试消耗，把时间还给自己。">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0a0a0a">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg: #ffffff;
+            --bg-muted: #fafafa;
+            --bg-card: #f5f5f5;
+            --text: #0a0a0a;
+            --text-secondary: #525252;
+            --text-tertiary: #a3a3a3;
+            --border: #e5e5e5;
+            --border-light: #f0f0f0;
+            --accent: #0a0a0a;
+            --mono: 'Geist Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            --sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: "Noto Serif SC", "Source Han Serif CN", "Songti SC", Georgia, serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.8;
-            overflow-x: hidden;
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ===== Hero ===== */
-        .hero {
-            position: relative;
-            min-height: 100vh;
+        /* ===== Selection ===== */
+        ::selection {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        /* ===== Header ===== */
+        header {
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 2rem;
-            overflow: hidden;
+            justify-content: space-between;
+            height: 52px;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(34, 85, 34, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(20, 60, 80, 0.12) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(80, 50, 20, 0.08) 0%, transparent 50%);
-            z-index: 0;
-        }
-
-        /* 树冠粒子效果 */
-        .particles {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px; height: 2px;
-            background: rgba(100, 180, 100, 0.4);
-            border-radius: 50%;
-            animation: float 8s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            50% { transform: translateY(-30vh) translateX(20px); }
-        }
-
-        .hero-content { position: relative; z-index: 1; max-width: 800px; }
-
-        .hero-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 20px rgba(100, 180, 100, 0.3));
-        }
-
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #8fbc8f, #c9a96e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 1.15rem;
-            color: #999;
-            margin-bottom: 2rem;
-            letter-spacing: 0.3em;
-        }
-
-        .hero .tagline {
-            font-size: 1.3rem;
-            color: #b8b8b8;
-            font-style: italic;
-            margin-bottom: 3rem;
-            padding: 0 1rem;
-            border-left: 3px solid #5a8a5a;
-            line-height: 2;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            letter-spacing: 0.1em;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #2d5a2d, #3a7a3a);
-            color: #e0e0e0;
-            border: 1px solid #4a8a4a;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #3a7a3a, #4a9a4a);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(60, 120, 60, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #b8b8b8;
-            border: 1px solid #444;
-        }
-
-        .btn-secondary:hover {
-            border-color: #888;
-            color: #fff;
-        }
-
-        /* ===== Section 通用 ===== */
-        section {
-            padding: 5rem 2rem;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #2a2a2a;
-            color: #c9a96e;
-            letter-spacing: 0.1em;
-        }
-
-        section h2 .emoji { margin-right: 0.5rem; }
-
-        /* ===== 理念 ===== */
-        .philosophy {
-            background: #0f0f0f;
-        }
-
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .philosophy-card {
-            padding: 1.5rem;
-            background: #161616;
-            border: 1px solid #222;
-            border-radius: 8px;
-            transition: border-color 0.3s;
-        }
-
-        .philosophy-card:hover { border-color: #4a8a4a; }
-
-        .philosophy-card h3 {
-            font-size: 1.1rem;
-            color: #8fbc8f;
-            margin-bottom: 0.8rem;
-        }
-
-        .philosophy-card p {
-            font-size: 0.95rem;
-            color: #999;
-        }
-
-        /* ===== 内容地图 ===== */
-        .content-map { background: #0a0a0a; }
-
-        .repo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .repo-card {
-            padding: 1.5rem;
-            background: #141414;
-            border: 1px solid #222;
-            border-radius: 8px;
-            transition: all 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .repo-card:hover {
-            border-color: #c9a96e;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-        }
-
-        .repo-card .card-header {
+        header .left {
             display: flex;
             align-items: center;
             gap: 0.6rem;
-            margin-bottom: 0.8rem;
         }
 
-        .repo-card .card-icon { font-size: 1.5rem; }
-
-        .repo-card h3 {
-            font-size: 1.1rem;
-            color: #e0e0e0;
+        header .logo {
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            text-decoration: none;
         }
 
-        .repo-card .card-desc {
-            font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 0.8rem;
+        header .logo:hover { opacity: 0.7; }
+
+        header .divider-v {
+            width: 1px;
+            height: 14px;
+            background: var(--border);
         }
 
-        .repo-card .card-tags {
+        header .status {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Desktop nav */
+        header .nav-links {
             display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+            gap: 2rem;
         }
 
-        .tag {
+        header .nav-links a {
+            font-family: var(--mono);
             font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-            background: #1e1e1e;
-            color: #888;
-            border: 1px solid #333;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: color 0.2s var(--ease-out);
+            position: relative;
         }
 
-        .tag.highlight {
-            background: #1a2e1a;
-            border-color: #3a5a3a;
-            color: #8fbc8f;
+        header .nav-links a:hover { color: var(--text); }
+
+        header .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--text);
+            transition: width 0.25s var(--ease-out);
         }
 
-        /* ===== 数据 ===== */
-        .stats {
-            background: #0f0f0f;
+        header .nav-links a:hover::after { width: 100%; }
+
+        /* Mobile hamburger */
+        header .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--text);
+        }
+
+        header .menu-toggle svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        /* ===== Container ===== */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== Reveal animation ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+        .reveal-delay-5 { transition-delay: 0.40s; }
+
+        /* ===== Hero ===== */
+        .hero {
+            padding: 10rem 0 6rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero .meta {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .hero .meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .hero .meta .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #22c55e;
+            display: inline-block;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .lead {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 460px;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.55rem 1.1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: var(--mono);
+            text-decoration: none;
+            transition: all 0.2s var(--ease-out);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            background: transparent;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .btn:hover {
+            background: var(--bg-card);
+            border-color: var(--text-tertiary);
+        }
+
+        .btn-fill {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+
+        .btn-fill:hover {
+            background: #333;
+            border-color: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .btn-fill:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+        /* ===== Section ===== */
+        .section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-num {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--text-tertiary);
+            letter-spacing: 0.04em;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        /* ===== Philosophy ===== */
+        .phil-list { display: flex; flex-direction: column; }
+
+        .phil-item {
+            padding: 1.75rem 0;
+            border-bottom: 1px solid var(--border-light);
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            gap: 0.75rem;
+            align-items: start;
+        }
+
+        .phil-item:last-child { border-bottom: none; }
+
+        .phil-item .num {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--text-tertiary);
+            padding-top: 0.2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .phil-item h3 {
+            font-size: 0.98rem;
+            font-weight: 600;
+            margin-bottom: 0.45rem;
+            letter-spacing: -0.01em;
+        }
+
+        .phil-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+
+        /* Quote */
+        .quote-block {
+            margin: 2.5rem 0 0;
+            padding: 1.75rem 0 1.75rem 1.5rem;
+            border-left: 2px solid var(--text);
+        }
+
+        .quote-block p {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            max-width: 520px;
+            font-style: italic;
+        }
+
+        /* ===== Content ===== */
+        .content-list { display: flex; flex-direction: column; }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-light);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s var(--ease-out);
+        }
+
+        .content-item:last-child { border-bottom: none; }
+
+        .content-item:hover {
+            padding-left: 6px;
+        }
+
+        .content-item:hover .arrow {
+            transform: translateX(3px);
+            color: var(--text);
+        }
+
+        .content-item .left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-item .icon {
+            font-size: 1.15rem;
+            width: 32px;
             text-align: center;
         }
 
-        .stats-grid {
+        .content-item .info h3 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+            letter-spacing: -0.01em;
+        }
+
+        .content-item .info .desc {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            letter-spacing: -0.01em;
+        }
+
+        .content-item .arrow {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            transition: all 0.2s var(--ease-out);
+        }
+
+        /* ===== Stats ===== */
+        .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(4, 1fr);
         }
 
-        .stat-item .stat-num {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #8fbc8f, #c9a96e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .stat-item {
+            text-align: left;
+            padding: 1.75rem 0;
+            border-right: 1px solid var(--border);
+            padding-right: 1.5rem;
         }
 
-        .stat-item .stat-label {
-            font-size: 0.9rem;
-            color: #888;
+        .stat-item:last-child { border-right: none; }
+
+        .stat-num {
+            font-family: var(--mono);
+            font-size: 1.6rem;
+            font-weight: 500;
+            letter-spacing: -0.04em;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--text-tertiary);
             margin-top: 0.3rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
         }
 
-        /* ===== 贡献者 ===== */
-        .contributors { background: #0a0a0a; }
-
-        .contributor-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
+        /* ===== Contributors ===== */
+        .contributor-grid { display: flex; flex-direction: column; }
 
         .contributor {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            padding: 0.6rem 1rem;
-            background: #161616;
-            border: 1px solid #222;
-            border-radius: 6px;
+            justify-content: space-between;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .contributor:last-child { border-bottom: none; }
+
+        .contributor .left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
         .contributor .avatar {
-            width: 32px; height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #3a5a3a, #5a3a3a);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
-            color: #ccc;
+            font-size: 0.7rem;
+            font-family: var(--mono);
+            font-weight: 500;
+            color: var(--text-secondary);
+            flex-shrink: 0;
         }
 
-        .contributor .name { font-size: 0.95rem; color: #ccc; }
-        .contributor .role { font-size: 0.8rem; color: #666; }
-
-        /* ===== 加入我们 ===== */
-        .join {
-            background: #0f0f0f;
-            text-align: center;
+        .contributor .name {
+            font-size: 0.88rem;
+            font-weight: 500;
         }
 
-        .join-box {
-            background: linear-gradient(135deg, #1a2a1a, #1a1a2a);
-            border: 1px solid #2a3a2a;
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            max-width: 600px;
-            margin: 2rem auto 0;
+        .contributor .role {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
         }
 
-        .join-box p {
-            font-size: 1.05rem;
-            color: #bbb;
-            margin-bottom: 1.5rem;
-            line-height: 2;
+        .contributor--cta {
+            border-bottom: none;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .contributor--cta:hover { opacity: 1; }
+
+        .contributor--cta .avatar {
+            border-style: dashed;
+            color: var(--text-tertiary);
+        }
+
+        /* ===== Join ===== */
+        .join-content {
+            max-width: 540px;
+        }
+
+        .join-content .desc {
+            font-size: 1.02rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.85;
         }
 
         .join-steps {
-            text-align: left;
-            margin: 2rem 0;
-            padding-left: 1.5rem;
+            list-style: none;
+            counter-reset: step;
+            padding: 0;
+            margin-bottom: 2.5rem;
         }
 
         .join-steps li {
-            margin-bottom: 0.8rem;
-            color: #999;
-            font-size: 0.95rem;
+            counter-increment: step;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: flex;
+            gap: 0.85rem;
+            align-items: baseline;
         }
 
-        .join-steps li strong { color: #8fbc8f; }
+        .join-steps li:last-child { border-bottom: none; }
+
+        .join-steps li::before {
+            content: counter(step, decimal-leading-zero);
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--text-tertiary);
+            min-width: 1.2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .join-steps li strong { color: var(--text); font-weight: 600; }
+
+        /* ===== Links ===== */
+        .links-list { display: flex; flex-direction: column; }
+
+        .link-item {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            padding: 1.4rem 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.2s var(--ease-out);
+        }
+
+        .link-item:last-child { border-bottom: none; }
+
+        .link-item:hover { padding-left: 6px; }
+
+        .link-item h3 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .link-item p {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--text-tertiary);
+            line-height: 1.65;
+        }
+
+        .link-item .url {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--text-tertiary);
+            margin-top: 0.5rem;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.2s var(--ease-out);
+        }
+
+        .link-item:hover .url { opacity: 1; }
 
         /* ===== Footer ===== */
         footer {
-            text-align: center;
-            padding: 2rem;
-            color: #555;
-            font-size: 0.85rem;
-            border-top: 1px solid #1a1a1a;
+            padding: 3rem 2rem;
         }
 
-        footer a { color: #666; text-decoration: none; }
-        footer a:hover { color: #8fbc8f; }
-
-        /* ===== 引用 ===== */
-        blockquote {
-            margin: 1.5rem 0;
-            padding: 1rem 1.5rem;
-            border-left: 3px solid #5a8a5a;
-            background: #111;
-            font-style: italic;
-            color: #999;
+        .footer-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        /* ===== 响应式 ===== */
+        .footer-left {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            line-height: 1.8;
+        }
+
+        .footer-left a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-left a:hover { color: var(--text); }
+
+        .footer-right {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--text-tertiary);
+            text-align: right;
+            line-height: 1.8;
+        }
+
+        .back-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.2s;
+            margin-top: 0.3rem;
+        }
+
+        .back-top:hover { color: var(--text); }
+
+        /* ===== Mobile nav overlay ===== */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(16px);
+            z-index: 200;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .mobile-nav.open { display: flex; }
+
+        .mobile-nav a {
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: opacity 0.15s;
+        }
+
+        .mobile-nav a:hover { opacity: 0.6; }
+
+        .mobile-nav .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 0.8rem;
+        }
+
+        /* ===== Responsive ===== */
         @media (max-width: 640px) {
-            .hero h1 { font-size: 2rem; }
-            .hero .subtitle { font-size: 0.9rem; letter-spacing: 0.15em; }
-            .hero .tagline { font-size: 1rem; }
-            section { padding: 3rem 1.2rem; }
-            .cta-group { flex-direction: column; align-items: center; }
+            .hero {
+                padding: 6rem 0 4rem;
+            }
+
+            .hero .meta {
+                flex-direction: row;
+                gap: 1rem;
+                font-size: 0.65rem;
+            }
+
+            .hero .lead {
+                font-size: 1rem;
+            }
+
+            header .nav-links { display: none; }
+            header .menu-toggle { display: block; }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0;
+            }
+
+            .stat-item { border-right: none; }
+            .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+            .stat-item:nth-child(n+3) { border-top: 1px solid var(--border); }
+
+            .phil-item {
+                grid-template-columns: 1fr;
+            }
+
+            .phil-item .num { display: none; }
+
+            .content-item .icon { display: none; }
+
+            .section { padding: 3.5rem 0; }
+
+            .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-right { text-align: center; }
+
+            .container { padding: 0 1.25rem; }
+            header { padding: 0 1.25rem; }
+        }
+
+        /* ===== Print ===== */
+        @media print {
+            header { position: static; }
+            .hero { padding: 2rem 0; }
+            .section { padding: 2rem 0; }
+            .reveal { opacity: 1 !important; transform: none !important; }
         }
     </style>
 </head>
 <body>
 
-<!-- ===== Hero ===== -->
-<div class="hero">
-    <div class="particles" id="particles"></div>
-    <div class="hero-content">
-        <div class="hero-icon">🌲</div>
-        <h1>NUDT 资源森林</h1>
-        <div class="subtitle">共 享 学习 · 自 由 成 长</div>
-        <div class="tagline">
-            减少考试消耗，把时间还给真正想做的事。<br>
-            充足的自我支配时间，往往会催生自觉性。
-        </div>
-        <div class="cta-group">
-            <a class="btn btn-primary" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">
-                📦 浏览仓库
-            </a>
-            <a class="btn btn-secondary" href="#join">
-                🤝 加入我们
-            </a>
-        </div>
+<!-- Header -->
+<header>
+    <div class="left">
+        <a class="logo" href="https://gitee.com/geekChen01/nudt_learning_resources">← nudt-resources</a>
+        <div class="divider-v"></div>
+        <div class="status">cs-resources · MIT</div>
     </div>
+    <nav class="nav-links">
+        <a href="#philosophy">理念</a>
+        <a href="#content">内容</a>
+        <a href="#data">数据</a>
+        <a href="#join">参与</a>
+    </nav>
+    <button class="menu-toggle" onclick="document.querySelector('.mobile-nav').classList.add('open')" aria-label="菜单">
+        <svg viewBox="0 0 24 24"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
+    </button>
+</header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav">
+    <button class="close-btn" onclick="this.parentElement.classList.remove('open')">✕ 关闭</button>
+    <a href="#philosophy" onclick="this.parentElement.classList.remove('open')">理念</a>
+    <a href="#content" onclick="this.parentElement.classList.remove('open')">内容</a>
+    <a href="#data" onclick="this.parentElement.classList.remove('open')">数据</a>
+    <a href="#join" onclick="this.parentElement.classList.remove('open')">参与</a>
 </div>
 
-<!-- ===== 理念 ===== -->
-<section class="philosophy">
-    <h2><span class="emoji">💡</span>为什么做这件事</h2>
-    <div class="philosophy-grid">
-        <div class="philosophy-card">
-            <h3>考试不该是全部</h3>
-            <p>大学前，应试教育的模式重复了 12 年。在本科，它还可能继续 4 年。但费心于应试的学生，成不了重大项目的工程师。</p>
+<div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="meta reveal">
+            <span><span class="dot"></span>CS Resources</span>
+            <span>NUDT · 计算机专业</span>
         </div>
-        <div class="philosophy-card">
-            <h3>培养方案是大锅饭</h3>
-            <p>制定几千人的计划时，不可能实现每个人的精细化培养。个人的方案必然要自己去探索——学校提供的是平台，不是天花板。</p>
-        </div>
-        <div class="philosophy-card">
-            <h3>知识是表，思维是实</h3>
-            <p>书本教给你的知识都是过时的。但几百年来成型的学科体系，其价值在于思维训练。关键是用最少的时间，获得最好的训练。</p>
+        <h1 class="reveal reveal-delay-1">计算机专业课，<br>不只是过考试。</h1>
+        <p class="lead reveal reveal-delay-2">AI · OS · 编译原理 · 计网 · 离散数学 · 数据库 · 软工——每门课的资料都在这。<br>用好资料，省下时间做真正重要的事。</p>
+        <div class="hero-actions reveal reveal-delay-3">
+            <a class="btn btn-fill" href="https://gitee.com/geekChen01/cs-resources" target="_blank">浏览仓库 →</a>
+            <a class="btn" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">主仓库 →</a>
         </div>
     </div>
-    <blockquote>
-        只要不是在费尽心思应付完课业后疲惫却又无可选择的玩着手机，<br>
-        那我们的初心就已实现。
-    </blockquote>
-</section>
 
-<!-- ===== 内容地图 ===== -->
-<section class="content-map">
-    <h2><span class="emoji">🗺️</span>内容地图</h2>
-    <div class="repo-grid">
-        <a class="repo-card" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">
-            <div class="card-header">
-                <span class="card-icon">📚</span>
-                <h3>公共基础课</h3>
-            </div>
-            <div class="card-desc">全校必修课程资料。高数、线代、概率论、大学物理、思政类课程……你的前两年，我们包了。</div>
-            <div class="card-tags">
-                <span class="tag highlight">高数上下</span>
-                <span class="tag highlight">概率论</span>
-                <span class="tag highlight">大学物理</span>
-                <span class="tag">思政类</span>
-                <span class="tag">大物实验</span>
-            </div>
-        </a>
-        <a class="repo-card" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
-            <div class="card-header">
-                <span class="card-icon">🖥️</span>
-                <h3>计算机专业课</h3>
-            </div>
-            <div class="card-desc">AI、OS、编译原理、计网、离散数学、数据库、软工……9 门核心课程，含试卷、实验代码和课件。</div>
-            <div class="card-tags">
-                <span class="tag highlight">AI (CS188)</span>
-                <span class="tag highlight">操作系统</span>
-                <span class="tag highlight">计算机网络</span>
-                <span class="tag">离散数学</span>
-                <span class="tag">软件工程</span>
-            </div>
-        </a>
-        <a class="repo-card" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">
-            <div class="card-header">
-                <span class="card-icon">🚀</span>
-                <h3>空天专业课</h3>
-            </div>
-            <div class="card-desc">材料力学、理论力学、工程热力学、自动控制原理——力学与热力学方向核心课程。</div>
-            <div class="card-tags">
-                <span class="tag">材料力学</span>
-                <span class="tag">理论力学</span>
-                <span class="tag">工程热力学</span>
-                <span class="tag">自控原理</span>
-            </div>
-        </a>
-        <a class="repo-card" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">
-            <div class="card-header">
-                <span class="card-icon">🧠</span>
-                <h3>智科专业课</h3>
-            </div>
-            <div class="card-desc">计算机硬件、信号与系统、自动控制原理。智能科学方向课程资料。</div>
-            <div class="card-tags">
-                <span class="tag">计算机硬件</span>
-                <span class="tag">信号与系统</span>
-                <span class="tag">自控原理</span>
-            </div>
-        </a>
-        <a class="repo-card" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">
-            <div class="card-header">
-                <span class="card-icon">🏆</span>
-                <h3>学科竞赛</h3>
-            </div>
-            <div class="card-desc">数学建模、物理竞赛、力学竞赛、数学竞赛——竞赛资料与经验。</div>
-            <div class="card-tags">
-                <span class="tag highlight">美赛 ★★★★★</span>
-                <span class="tag highlight">物理竞赛 ★★★★★</span>
-                <span class="tag">力学竞赛</span>
-                <span class="tag">数学竞赛</span>
-            </div>
-        </a>
-        <a class="repo-card" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">
-            <div class="card-header">
-                <span class="card-icon">📖</span>
-                <h3>前人心得</h3>
-            </div>
-            <div class="card-desc">四年完整经验总结：选课策略、竞赛推荐、课外阅读、保研/考研方向——过来人的真实建议。</div>
-            <div class="card-tags">
-                <span class="tag">四年规划</span>
-                <span class="tag">竞赛推荐</span>
-                <span class="tag">书籍推荐</span>
-            </div>
-        </a>
-    </div>
-</section>
-
-<!-- ===== 数据 ===== -->
-<section class="stats">
-    <h2><span class="emoji">📊</span>项目数据</h2>
-    <div class="stats-grid">
-        <div class="stat-item">
-            <div class="stat-num">1000+</div>
-            <div class="stat-label">学习资料文件</div>
+    <!-- Philosophy -->
+    <div class="section" id="philosophy">
+        <div class="section-head reveal">
+            <span class="section-num">01 —</span>
+            <h2 class="section-title">理念</h2>
         </div>
-        <div class="stat-item">
-            <div class="stat-num">20+</div>
-            <div class="stat-label">覆盖课程</div>
+        <div class="phil-list">
+            <div class="phil-item reveal">
+                <div class="num">01</div>
+                <div>
+                    <h3>考试不该是全部</h3>
+                    <p>大学前，应试教育的模式重复了 12 年。在本科，它还可能继续 4 年。但费心于应试的学生，成不了重大项目的工程师。</p>
+                </div>
+            </div>
+            <div class="phil-item reveal">
+                <div class="num">02</div>
+                <div>
+                    <h3>培养方案是大锅饭</h3>
+                    <p>制定几千人的计划时，不可能实现每个人的精细化培养。个人的方案必然要自己去探索——学校提供的是平台，不是天花板。</p>
+                </div>
+            </div>
+            <div class="phil-item reveal">
+                <div class="num">03</div>
+                <div>
+                    <h3>知识是表，思维是实</h3>
+                    <p>书本教给你的知识都是过时的。但几百年来成型的学科体系，其价值在于思维训练。关键是用最少的时间，获得最好的训练。</p>
+                </div>
+            </div>
         </div>
-        <div class="stat-item">
-            <div class="stat-num">4</div>
-            <div class="stat-label">学科大类</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num">MIT</div>
-            <div class="stat-label">开源协议</div>
+        <div class="quote-block reveal">
+            <p>只要不是在费尽心思应付完课业后疲惫却又无可选择的玩着手机，那我们的初心就已实现。</p>
         </div>
     </div>
-</section>
 
-<!-- ===== 贡献者 ===== -->
-<section class="contributors">
-    <h2><span class="emoji">👥</span>贡献者</h2>
-    <p style="text-align:center; color:#888; margin-bottom: 1rem;">每一份资料都来自真实的学习经历</p>
-    <div class="contributor-list">
-        <div class="contributor">
-            <div class="avatar">G</div>
-            <div>
-                <div class="name">geekChen</div>
-                <div class="role">创始人 · 公共课/计科</div>
-            </div>
+    <!-- Content -->
+    <div class="section" id="content">
+        <div class="section-head reveal">
+            <span class="section-num">02 —</span>
+            <h2 class="section-title">内容</h2>
         </div>
-        <div class="contributor">
-            <div class="avatar">T</div>
-            <div>
-                <div class="name">Truman</div>
-                <div class="role">智科专业课</div>
-            </div>
-        </div>
-        <div class="contributor">
-            <div class="avatar">吴</div>
-            <div>
-                <div class="name">带吴钩</div>
-                <div class="role">空天专业课</div>
-            </div>
-        </div>
-        <div class="contributor">
-            <div class="avatar">你</div>
-            <div>
-                <div class="name">……</div>
-                <div class="role">下一个贡献者</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== 加入我们 ===== -->
-<section class="join" id="join">
-    <h2><span class="emoji">✉️</span>加入我们</h2>
-    <div class="join-box">
-        <p>
-            我们不是在做一个资源合集。<br>
-            我们在寻找一群人——<br>
-            <strong style="color:#8fbc8f;">相信自由时间比刷题更有价值的人。</strong>
-        </p>
-        <ol class="join-steps">
-            <li><strong>你有学习资料？</strong> 注册 Gitee，Fork 仓库，提 Pull Request</li>
-            <li><strong>你需要资料？</strong> 直接浏览仓库，或者在 Issue 中留言需要什么</li>
-            <li><strong>你有想法？</strong> 欢迎来讨论区分享你的认知和经验</li>
-            <li><strong>你在其他学校？</strong> Fork 之后建你自己的分支，我们也可以互链</li>
-        </ol>
-        <div class="cta-group">
-            <a class="btn btn-primary" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">
-                🚀 立即前往 Gitee
+        <div class="content-list">
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">🤖</span>
+                    <div class="info">
+                        <h3>人工智能</h3>
+                        <div class="desc">搜索算法 · 多智能体 · Pacman 实验</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
             </a>
-            <a class="btn btn-secondary" href="https://gitee.com/geekChen01/nudt_learning_resources/issues" target="_blank">
-                💬 提一个 Issue
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">💾</span>
+                    <div class="info">
+                        <h3>操作系统</h3>
+                        <div class="desc">期末卷 · 实验代码 · 进程与内存管理</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">⚙️</span>
+                    <div class="info">
+                        <h3>编译原理</h3>
+                        <div class="desc">课件 · 词法分析 · 语法分析</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">🌐</span>
+                    <div class="info">
+                        <h3>计算机网络</h3>
+                        <div class="desc">自顶向下方法 · Socket 编程 · Wireshark 实验</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">🔢</span>
+                    <div class="info">
+                        <h3>离散数学</h3>
+                        <div class="desc">测试试卷 · 课件 · 图论与逻辑</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">🗄️</span>
+                    <div class="info">
+                        <h3>数据库系统</h3>
+                        <div class="desc">SQL · 关系模型 · 2024 课件</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">📋</span>
+                    <div class="info">
+                        <h3>软件工程</h3>
+                        <div class="desc">开卷资料 · 期末试卷 · 软件生命周期</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">🖥️</span>
+                    <div class="info">
+                        <h3>计算机原理</h3>
+                        <div class="desc">期末复习 · 体系结构 · CPU 与存储</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+            <a class="content-item reveal" href="https://gitee.com/geekChen01/cs-resources" target="_blank">
+                <div class="left">
+                    <span class="icon">📊</span>
+                    <div class="info">
+                        <h3>数据挖掘</h3>
+                        <div class="desc">算法 · 数据预处理 · 模型评估</div>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
             </a>
         </div>
-    </div>
-</section>
 
-<!-- ===== 推荐 ===== -->
-<section style="background: #0a0a0a;">
-    <h2><span class="emoji">🌟</span>推荐阅读</h2>
-    <div class="philosophy-grid">
-        <a class="philosophy-card" href="https://survivesjtu.gitbook.io/survivesjtumanual" target="_blank" style="text-decoration:none; color:inherit;">
-            <h3>📘 上海交通大学生存手册</h3>
-            <p>"国内绝大部分大学的本科教学，不是濒临崩溃，而是早已崩溃。"</p>
-        </a>
-        <a class="philosophy-card" href="https://open-da.github.io/OpenDA-Wiki/preface/" target="_blank" style="text-decoration:none; color:inherit;">
-            <h3>📗 OpenDA 项目</h3>
-            <p>如何让教育更平等地惠及更多人——A dream worth fighting for.</p>
-        </a>
-        <a class="philosophy-card" href="https://github.com/ruanyf/weekly" target="_blank" style="text-decoration:none; color:inherit;">
-            <h3>📰 科技爱好者周刊</h3>
-            <p>阮一峰每周发布，记录值得分享的科技内容。已更新 350+ 期。</p>
-        </a>
+    <!-- Stats -->
+    <div class="section" id="data">
+        <div class="section-head reveal">
+            <span class="section-num">03 —</span>
+            <h2 class="section-title">数据</h2>
+        </div>
+        <div class="stats-row reveal">
+            <div class="stat-item">
+                <div class="stat-num">9</div>
+                <div class="stat-label">核心课程</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">50+</div>
+                <div class="stat-label">资料文件</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">Gitee</div>
+                <div class="stat-label">开源托管</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">MIT</div>
+                <div class="stat-label">开源协议</div>
+            </div>
+        </div>
     </div>
-</section>
 
-<!-- ===== Footer ===== -->
+    <!-- Contributors -->
+    <div class="section">
+        <div class="section-head reveal">
+            <span class="section-num">04 —</span>
+            <h2 class="section-title">贡献者</h2>
+        </div>
+        <div class="contributor-grid">
+            <div class="contributor reveal">
+                <div class="left">
+                    <div class="avatar">G</div>
+                    <span class="name">geekChen</span>
+                </div>
+                <span class="role">创始人 · 计算机专业</span>
+            </div>
+
+
+            <div class="contributor contributor--cta reveal">
+                <div class="left">
+                    <div class="avatar">+</div>
+                    <span class="name">下一个贡献者</span>
+                </div>
+                <span class="role"><a href="#join" style="color: var(--text-tertiary); text-decoration: none;">可能是你 →</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join -->
+    <div class="section" id="join">
+        <div class="section-head reveal">
+            <span class="section-num">05 —</span>
+            <h2 class="section-title">参与</h2>
+        </div>
+        <div class="join-content">
+            <div class="desc reveal">我们不是在做一个资源合集。我们在寻找一群人——相信自由时间比刷题更有价值的人。</div>
+            <ol class="join-steps">
+                <li class="reveal"><strong>你有学习资料？</strong>&nbsp;Fork 仓库，提 Pull Request</li>
+                <li class="reveal"><strong>你需要资料？</strong>&nbsp;浏览仓库 / Issue 留言</li>
+                <li class="reveal"><strong>你有想法？</strong>&nbsp;讨论区分享</li>
+                <li class="reveal"><strong>你在其他学校？</strong>&nbsp;Fork 建分支，互链</li>
+            </ol>
+            <div class="hero-actions reveal">
+                <a class="btn btn-fill" href="https://gitee.com/geekChen01/nudt_learning_resources" target="_blank">前往 Gitee →</a>
+                <a class="btn" href="https://gitee.com/geekChen01/nudt_learning_resources/issues" target="_blank">提 Issue</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Links -->
+    <div class="section">
+        <div class="section-head reveal">
+            <span class="section-num">06 —</span>
+            <h2 class="section-title">推荐</h2>
+        </div>
+        <div class="links-list">
+            <a class="link-item reveal" href="https://survivesjtu.gitbook.io/survivesjtumanual" target="_blank">
+                <h3>上海交通大学生存手册</h3>
+                <p>"国内绝大部分大学的本科教学，不是濒临崩溃，而是早已崩溃。"</p>
+                <span class="url">survivesjtu.gitbook.io →</span>
+            </a>
+            <a class="link-item reveal" href="https://open-da.github.io/OpenDA-Wiki/preface/" target="_blank">
+                <h3>OpenDA 项目</h3>
+                <p>如何让教育更平等地惠及更多人——A dream worth fighting for.</p>
+                <span class="url">open-da.github.io →</span>
+            </a>
+            <a class="link-item reveal" href="https://github.com/ruanyf/weekly" target="_blank">
+                <h3>科技爱好者周刊</h3>
+                <p>阮一峰每周发布，记录值得分享的科技内容。已更新 350+ 期。</p>
+                <span class="url">github.com/ruanyf/weekly →</span>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
 <footer>
-    <p>
-        <a href="https://gitee.com/geekChen01/nudt_learning_resources">NUDT 资源森林</a> ·
-        MIT License · 仅供学习交流
-    </p>
-    <p style="margin-top: 0.5rem;">
-        The free development of each is the condition for the free development of all.
-    </p>
+    <div class="footer-inner">
+        <div class="footer-left">
+            <div><a href="https://gitee.com/geekChen01/cs-resources">cs-resources</a> · MIT License</div>
+            <div>The free development of each is the condition for the free development of all.</div>
+        </div>
+        <div class="footer-right">
+            <div>© 2024–2026</div>
+            <a class="back-top" href="#">↑ 回到顶部</a>
+        </div>
+    </div>
 </footer>
 
-<!-- ===== 粒子动画 ===== -->
+<!-- Minimal scroll-reveal (no library, ~15 lines) -->
 <script>
-    // 生成树冠飘落的粒子
-    const container = document.getElementById('particles');
-    for (let i = 0; i < 30; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.style.left = Math.random() * 100 + '%';
-        p.style.top = Math.random() * 100 + '%';
-        p.style.animationDelay = Math.random() * 8 + 's';
-        p.style.animationDuration = (6 + Math.random() * 6) + 's';
-        p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
-        container.appendChild(p);
-    }
-
-    // 滚动淡入
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+(function () {
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.repo-card, .philosophy-card, .stat-item, .contributor').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function (el) { observer.observe(el); });
+})();
 </script>
 
 </body>
