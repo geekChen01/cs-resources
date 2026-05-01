@@ -1,0 +1,32 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office 临时文件
+~$*
+*.tmp
+
+# 压缩包（应解压后入库或放网盘）
+*.rar
+*.7z
+*.tar.gz
+
+# 大型二进制（应放网盘链接）
+*.exe
+*.msi
