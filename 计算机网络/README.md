@@ -1,38 +1,65 @@
 # 计算机网络
 
-## 📂 资料清单
+## 资源架构
+```
+├── 样卷1.pdf
+├── 样卷2.doc
+├── 计算机网络-自顶向下方法(第7版)参考答案-EN版.pdf
+└── 实验-2023版/
+    ├── 实验任务书/
+    │   ├── 第一单元 基于套接字的网络程序设计.pdf
+    │   └── 第二单元- Wireshark抓包并分析TCPIP协议.pdf
+    ├── socket源代码/
+    │   ├── client.py
+    │   └── server.py
+    ├── WebServer源代码/
+    │   ├── web-server.py
+    │   ├── 多线程web-multi-client.py
+    │   └── 多线程web-multi-server.py
+    └── SMTP源代码/
+        └── SMTP-client .py
+```
 
-### 教材与参考
+## 资源清单
+
+### 试卷与参考
 | 文件 | 说明 |
 |------|------|
-| `SM - Computer Networking 8e Kurose.pdf` | 《计算机网络：自顶向下方法》第8版（Kurose） |
-| `计算机网络：自顶向下方法(第7版)参考答案.txt` | 第7版课后习题参考答案链接 |
+| [样卷1.pdf](./样卷1.pdf) | 期末样卷 1 |
+| [样卷2.doc](./样卷2.doc) | 期末样卷 2 |
+| [计算机网络-自顶向下方法(第7版)参考答案-EN版.pdf](./计算机网络-自顶向下方法(第7版)参考答案-EN版.pdf) | 第7版课后习题参考答案（英文版） |
 
-### 试卷与复习
+### 实验（2023 版）
+
+#### Socket 编程
 | 文件 | 说明 |
 |------|------|
-| `参考题型_计网.pdf` | 参考题型 |
-| `计算机网络-T2-复习 -答案.doc` | T2 复习题及答案 |
+| [第一单元 基于套接字的网络程序设计.pdf](./实验-2023版/实验任务书/第一单元%20基于套接字的网络程序设计.pdf) | Socket 实验任务书 |
+| [client.py](./实验-2023版/socket源代码/client.py) | 客户端代码 |
+| [server.py](./实验-2023版/socket源代码/server.py) | 服务端代码 |
 
-### 实验作业
-| 实验 | 文件 | 说明 |
-|------|------|------|
-| Socket 编程 | `实验作业/socket.docx` | 实验指导书 |
-| | `实验作业/socket源代码/client.py`、`server.py` | 客户端/服务端代码 |
-| WebServer | `实验作业/WebServer.docx` | 实验指导书 |
-| | `实验作业/WebServer源代码/` | 单线程 & 多线程 Web 服务器 |
-| SMTP 邮件 | `实验作业/SMTP.docx` | 实验指导书 |
-| | `实验作业/SMTP源代码/SMTP-client .py` | SMTP 客户端代码 |
-| Wireshark 抓包 | `实验作业/wireshark.docx` | 实验指导书 |
-| | `实验作业/Wireshark Capture file/` | 5 组 pcapng 抓包文件 |
+#### WebServer
+| 文件 | 说明 |
+|------|------|
+| [web-server.py](./实验-2023版/WebServer源代码/web-server.py) | 单线程 Web 服务器 |
+| [多线程web-multi-client.py](./实验-2023版/WebServer源代码/多线程web-multi-client.py) | 多线程客户端 |
+| [多线程web-multi-server.py](./实验-2023版/WebServer源代码/多线程web-multi-server.py) | 多线程服务端 |
 
-#### Wireshark 抓包文件清单
-- `1.HTTP 和 TCP 协议分析.pcapng`
-- `arp.pcapng`
-- `DHCP协议分析.pcapng`
-- `DNS 和UDP协议分析.pcapng`
-- `ICMP 和 IP 协议分析.pcapng`
+#### SMTP 邮件
+| 文件 | 说明 |
+|------|------|
+| [SMTP-client .py](./实验-2023版/SMTP源代码/SMTP-client%20.py) | SMTP 客户端代码 |
 
-## 💡 学习建议
+#### Wireshark 抓包
+| 文件 | 说明 |
+|------|------|
+| [第二单元- Wireshark抓包并分析TCPIP协议.pdf](./实验-2023版/实验任务书/第二单元-%20Wireshark抓包并分析TCPIP协议.pdf) | Wireshark 实验任务书 |
 
-计网实验重点是理解协议栈各层的工作原理。Wireshark 抓包实验建议对照教材逐字段分析，Socket 编程注意 TCP/UDP 的区别。
+## 指南
+### 课程作业
+教材上的作业，答案一个是pdf；一个是互联网上有人整理过答案：
+#### 1 by 幽弥狂[https://blog.jackeylea.com/]:
+https://blog.jackeylea.com/book/compute-network-top-down-mothed-answer/#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%E7%AC%AC7%E7%89%88
+
+#### 2:
+https://download.csdn.net/download/weixin_48077282/85859975
