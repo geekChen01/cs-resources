@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-# cs-resources
-计算机类专业资源
-=======
 # 计算机专业课资源
 
 ## 资源架构
@@ -66,4 +62,3 @@
 ## 许可
 
 MIT License — 仅供学习交流，请控制传播范围。
->>>>>>> Stashed changes
